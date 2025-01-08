@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "StudentSmartTrack",
-    "slug": "StudentSmartTrack",
+    "name": "Student SmartTrack",
+    "slug": "studentsmarttrack",
+    "scheme": "studentsmarttrack",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -23,6 +24,32 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-font"
+    ],
+    "extra": {
+      "fonts": {
+        "Poppins-Black": "./assets/fonts/poppins/Poppins-Black.ttf",
+        "Poppins-BlackItalic": "./assets/fonts/poppins/Poppins-BlackItalic.ttf",
+        "Poppins-Bold": "./assets/fonts/poppins/Poppins-Bold.ttf",
+        "Poppins-BoldItalic": "./assets/fonts/poppins/Poppins-BoldItalic.ttf",
+        "Poppins-ExtraBold": "./assets/fonts/poppins/Poppins-ExtraBold.ttf",
+        "Poppins-ExtraBoldItalic": "./assets/fonts/poppins/Poppins-ExtraBoldItalic.ttf",
+        "Poppins-ExtraLight": "./assets/fonts/poppins/Poppins-ExtraLight.ttf",
+        "Poppins-ExtraLightItalic": "./assets/fonts/poppins/Poppins-ExtraLightItalic.ttf",
+        "Poppins-Italic": "./assets/fonts/poppins/Poppins-Italic.ttf",
+        "Poppins-Light": "./assets/fonts/poppins/Poppins-Light.ttf",
+        "Poppins-LightItalic": "./assets/fonts/poppins/Poppins-LightItalic.ttf",
+        "Poppins-Medium": "./assets/fonts/poppins/Poppins-Medium.ttf",
+        "Poppins-MediumItalic": "./assets/fonts/poppins/Poppins-MediumItalic.ttf",
+        "Poppins-Regular": "./assets/fonts/poppins/Poppins-Regular.ttf",
+        "Poppins-SemiBold": "./assets/fonts/poppins/Poppins-SemiBold.ttf",
+        "Poppins-SemiBoldItalic": "./assets/fonts/poppins/Poppins-SemiBoldItalic.ttf",
+        "Poppins-Thin": "./assets/fonts/poppins/Poppins-Thin.ttf",
+        "Poppins-ThinItalic": "./assets/fonts/poppins/Poppins-ThinItalic.ttf"
+      }
     }
   }
 }
