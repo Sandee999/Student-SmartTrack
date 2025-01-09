@@ -3,11 +3,9 @@ import { View, Text, Image, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import AddSubjectButton from '../../components/AddSubjectButton';
-import AddSubjectModalScreen from '../../components/AddSubjectModalScreen';
 import DisplaySubjects from '../../components/DisplaySubjects'
 
 export default function attendancePage() {
-  const [ showAddSubjectScreen, setShowAddSubjectScreen ] = React.useState(false);
 
   return (
     <>
@@ -20,11 +18,10 @@ export default function attendancePage() {
             <Text adjustsFontSizeToFit className={`w-[50vw] h-[8vh] pt-2 text-2xl font-pmedium text-center align-middle text-white`}>Attendance</Text>
           </View>
           <View className={`w-[100vw] h-[92vh] bg-[#D4D6D6] justify-center items-center`}>
-            <DisplaySubjects showAddSubjectScreen={showAddSubjectScreen}/>
+            <DisplaySubjects/>
           </View>
         </View>
-        <AddSubjectModalScreen showAddSubjectScreen={showAddSubjectScreen} setShowAddSubjectScreen={setShowAddSubjectScreen}/>
-        <AddSubjectButton onPress={()=>setShowAddSubjectScreen(true)}/>
+        <AddSubjectButton/>
       </SafeAreaView>
     </>
   )

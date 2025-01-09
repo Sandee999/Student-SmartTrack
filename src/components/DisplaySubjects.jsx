@@ -1,11 +1,13 @@
-import { View, Text, FlatList, TouchableOpacity,RefreshControl, useWindowDimensions } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, Image, useWindowDimensions } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import CircularProgress from 'react-native-circular-progress-indicator';
 import { getValue, setValue } from '../util/asyncStorage';
 import { router } from 'expo-router';
+import { useIsFocused } from '@react-navigation/native';
 
-export default function DisplaySubjects({showAddSubjectScreen}) {
+export default function DisplaySubjects() {
   const { height, width } = useWindowDimensions();
+  const IsFocused = useIsFocused();
   const [sortedData, setSortedData] = useState([]);
 
   useEffect(() => {
@@ -15,7 +17,7 @@ export default function DisplaySubjects({showAddSubjectScreen}) {
       setSortedData(data.sort((a, b) => a[1].percentage - b[1].percentage));
     };
     get();
-  }, [showAddSubjectScreen]);
+  }, [IsFocused]);
 
   const updateAttendance = async (subject, type, index) => {
     // Get Data
@@ -53,14 +55,15 @@ export default function DisplaySubjects({showAddSubjectScreen}) {
         </View>
       </View>
       <View className={`w-[90vw] h-[50px] flex-row`}>
-        <TouchableOpacity onPress={()=>router.push(`/attendanceEditPage/${item[0]}`)} activeOpacity={.8} className={`w-[30vw] h-[50px] bg-[#C89B00] items-center justify-center rounded-bl-xl`}>
-          <Text adjustsFontSizeToFit className={`text-xl font-pmedium`}>Edit</Text>
+        <TouchableOpacity onPress={()=>router.push(`/attendanceEditPage/${item[0]}`)} activeOpacity={.8} className={`w-[30vw] h-[50px] bg-[#C89B00] items-center justify-center rounded-bl-xl flex-row`}>
+          <Image source={require('../../assets/otherIcons/edit.png')} resizeMode='contain' className={`w-[5vw] h-[30px]`}/>
+          <Text adjustsFontSizeToFit className={`px-2 h-[50px] text-center align-middle text-xl font-pmedium`}>Edit</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={()=>updateAttendance(item[0], 'absent', index)} activeOpacity={.8} className={`w-[30vw] h-[50px] bg-red-600 items-center justify-center`}>
-          <Text adjustsFontSizeToFit className={`text-xl font-pmedium`}>Absent</Text>
+          <Text adjustsFontSizeToFit className={`w-[30vw] h-[50px] text-center align-middle text-xl font-pmedium`}>Absent</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={()=>updateAttendance(item[0], 'present', index)} activeOpacity={.8} className={`w-[30vw] h-[50px] bg-green-600 items-center justify-center rounded-br-xl`}>
-          <Text adjustsFontSizeToFit className={`text-xl font-pmedium`}>Present</Text>
+          <Text adjustsFontSizeToFit className={`w-[30vw] h-[50px] text-center align-middle text-xl font-pmedium`}>Present</Text>
         </TouchableOpacity>
       </View>
     </View>
