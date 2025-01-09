@@ -3,8 +3,8 @@ import React, { useState, useEffect } from "react";
 import { Svg, Path } from "react-native-svg";
 import { Redirect } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useFonts } from "expo-font";
+import { getValue } from "../util/asyncStorage";
 
 const Logo = (props) => (
   <Svg xmlns="http://www.w3.org/2000/svg" width={148} height={105} {...props}>
@@ -48,7 +48,7 @@ export default function WelcomePage() {
 
   useEffect(() => {
     const checkSignInStatus = async () => {
-      const user = await AsyncStorage.getItem("user");
+      const user = await getValue('user');
       setRedirectTo(user ? "/home" : "/signUp");
     };
 
