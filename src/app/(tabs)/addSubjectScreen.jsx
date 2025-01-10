@@ -46,7 +46,9 @@ export default function addSubjectScreen() {
             placeholder='Enter Subject Name'
             placeholderTextColor={'#BCC1CAFF'}
             onChangeText={(e)=>setSubject(e)}
+            onSubmitEditing={onSubmit}
             maxLength={30}
+            autoCapitalize='words'
           />
           <Text className={`relative w-[65vw] text-base text-red-600`}>{(errorMessage)?`*${errorMessage}`:``}</Text>
         </View>

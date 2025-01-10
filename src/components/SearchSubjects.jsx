@@ -65,6 +65,7 @@ export default function SearchSubjects() {
             placeholderTextColor={'#BCC1CAFF'}
             onChangeText={handleTextChange}
             onSubmitEditing={handleSubmit}
+            autoCapitalize='words'
           />
         </View>
         {filteredSubjects.length > 0 && (
