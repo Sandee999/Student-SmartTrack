@@ -20,7 +20,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.sandee_666.studentsmarttrack"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -49,6 +50,12 @@
         "Poppins-SemiBoldItalic": "./assets/fonts/poppins/Poppins-SemiBoldItalic.ttf",
         "Poppins-Thin": "./assets/fonts/poppins/Poppins-Thin.ttf",
         "Poppins-ThinItalic": "./assets/fonts/poppins/Poppins-ThinItalic.ttf"
+      },
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "89044368-ad5f-480c-a86e-316b1d0fadb8"
       }
     }
   }

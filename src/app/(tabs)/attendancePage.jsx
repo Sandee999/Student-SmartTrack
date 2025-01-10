@@ -9,7 +9,7 @@ export default function attendancePage() {
 
   return (
     <>
-      <SafeAreaView className={`w-[100vw] h-[100vh]`}>
+      <SafeAreaView>
         <View className={`w-[100vw] h-[100vh]`}>
           <View className={`w-[100vw] h-[8vh] flex-row items-center justify-center bg-[#005EB8]`}>
             <Pressable onPress={()=>router.back()} className={`absolute left-6 top-5`}>

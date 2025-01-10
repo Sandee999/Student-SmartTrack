@@ -40,7 +40,7 @@ export default function SignUp() {
     <>
       <SafeAreaView>
         <KeyboardAvoidingView onTouchStart={Keyboard.dismiss} behavior='position' className={`w-[100vw] h-[100vh] bg-white`}>
-          <View className={`w-[100vw] h-[100vh] justify-center items-center`}>
+          <View className={`w-[100vw] h-full justify-center items-center`}>
             <Text adjustsFontSizeToFit className={`w-[80vw] h-[5vh] absolute top-16 text-3xl font-bold text-sky-600 text-center`}>Set Up Your Profile</Text>
             <ProfilePicSelection user={user} setUser={setUser} />
             <View className={`w-[90vw] h-[8vh] my-16`}>

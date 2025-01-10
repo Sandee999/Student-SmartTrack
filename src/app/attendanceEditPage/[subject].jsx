@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, TextInput, Image } from 'react-native'
+import { View, Text, TouchableOpacity, TextInput, Image,TouchableWithoutFeedback, Keyboard } from 'react-native'
 import React, { useState, useEffect, useRef, forwardRef } from 'react'
 import { router, useLocalSearchParams } from 'expo-router';
 import { getValue, mergeValue } from '../../util/asyncStorage'
@@ -42,19 +42,26 @@ export default function editSubject() {
   }
 
   const NunberCompunent = forwardRef(({ value, type }, ref) => {
-    const handleTextChange = (text) => {
-      if(type==='present') setPresentValue(Number(text) || 0);  // O if text is empty
-      if(type==='absent') setAbsentValue(Number(text) || 0);
-    }
+    const [ text, setText ] = useState(value);
 
     const handleDecrement = () => {
-      if(type==='present') setPresentValue((prev) => Math.max(prev - 1, 0));
-      if(type==='absent') setAbsentValue((prev) => Math.max(prev - 1, 0));
+      if(type==='present') setPresentValue(Math.max(Number(text)-1, 0));
+      if(type==='absent') setAbsentValue(Math.max(Number(text)-1, 0));
     }
 
     const handleIncrement = () => {
-      if(type==='present') setPresentValue((prev) => prev + 1);
-      if(type==='absent') setAbsentValue((prev) => prev + 1);
+      if(type==='present') setPresentValue(Math.min(Number(text)+1, 999));
+      if(type==='absent') setAbsentValue(Math.min(Number(text)+1, 999));
+    }
+
+    const onBlur = () => {
+      if(type==='present') setPresentValue(Math.min(Math.max(Number(text), 0), 999));  // O if text is empty
+      if(type==='absent') setAbsentValue(Math.min(Math.max(Number(text), 0), 999));
+    }
+
+    const onSubmitEditing = () => {
+      if(type==='present') setPresentValue(Math.min(Math.max(Number(text), 0), 999));  // O if text is empty
+      if(type==='absent') setAbsentValue(Math.min(Math.max(Number(text), 0), 999));
     }
 
     return (
@@ -65,25 +72,23 @@ export default function editSubject() {
         <TextInput 
           ref={ref}
           className={`w-[50px] h-[40px] bg-[#FBFBFB] border-[1px] border-gray-200 text-center align-middle`}
-          defaultValue={value || 0}
-          onBlur={handleTextChange}
+          value={text}
+          onChangeText={(e)=>setText(e)}
+          onSubmitEditing={onSubmitEditing}
+          onBlur={onBlur}
           keyboardType='number-pad'
         />
         <TouchableOpacity onPress={handleIncrement} className={`w-[40px] h-[40px] rounded-r-xl items-center justify-center border-[1px] border-gray-200 bg-green-600`}>
-        <Image source={require('../../../assets/otherIcons/add.png')} resizeMode='contain' className={`w-[23px] h-[23px]`}/>
+          <Image source={require('../../../assets/otherIcons/add.png')} resizeMode='contain' className={`w-[23px] h-[23px]`}/>
         </TouchableOpacity>
       </View>
     );
   })
 
-  const onTouchMove = () => {
-    presentRef.current.blur();
-    absentRef.current.blur();
-  }
-
   return (
-    <View onTouchMove={onTouchMove} className={`w-full h-full items-center justify-end`}>
-      <View className={`w-[100vw] h-[60vh] bg-[#fdfdfd] rounded-t-[40px] items-center justify-start`}>
+    <View className={`w-[100vw] h-full items-center justify-end`}>
+      <TouchableWithoutFeedback onPress={()=>Keyboard.dismiss()}>
+        <View className={`w-[100vw] h-[60vh] bg-[#fdfdfd] rounded-t-[40px] items-center justify-start`}>
         <View className={`w-[100vw] h-[4vh] bg-[#F9A620] rounded-t-[60px] items-center justify-center`}>
           <View className={`w-[50px] h-[5px] bg-white rounded opacity-60`}/>
         </View>
@@ -103,13 +108,13 @@ export default function editSubject() {
           <View className={`w-[100vw] h-[11vh] justify-center items-center flex-row`}>
             <Text className={`w-[60vw] h-[10vh] pl-5 pt-1 text-left align-middle text-2xl font-plight `}>Present Classes: </Text>
             <View className={`w-[40vw] h-[10vh] items-center justify-center`}>
-              <NunberCompunent value={String(presentValue)} type='present' ref={presentRef}/>
+              <NunberCompunent value={String(presentValue)||0} type='present' ref={presentRef}/>
             </View>
           </View>
           <View className={`w-[100vw] h-[11vh] justify-center items-center flex-row`}>
             <Text className={`w-[60vw] h-[10vh] pl-5 pt-1 text-left align-middle text-2xl font-plight `}>Absent Classes: </Text>
               <View className={`w-[40vw] h-[10vh] items-center justify-center`}>
-                <NunberCompunent value={String(absentValue)} type='absent' ref={absentRef}/>
+                <NunberCompunent value={String(absentValue)||0} type='absent' ref={absentRef}/>
               </View>
             </View>
           <View className={`w-[100vw] h-[11vh] justify-center items-center flex-row`}>
@@ -125,7 +130,8 @@ export default function editSubject() {
             </View>
           </View>
         </View>
-      </View>
+        </View>
+      </TouchableWithoutFeedback>
     </View>
   )
 }

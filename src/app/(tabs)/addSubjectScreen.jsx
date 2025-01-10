@@ -9,6 +9,7 @@ export default function addSubjectScreen() {
   
   function onClose(){
     setSubject('');
+    setErrorMessage('');
     router.back();
   }
 
