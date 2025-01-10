@@ -10,7 +10,6 @@ export default function HomeAttendanceDisplay() {
   const isFocused = useIsFocused();
   const [ data, setData ] = useState([]);
   const belowAvgData = data.filter(x=>x[1].percentage<75)
-  console.log(belowAvgData)
 
   useEffect(()=>{
     const get = async () => {
